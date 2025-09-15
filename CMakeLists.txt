@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 4.0)
 
-project(SDL-GameEngine LANGUAGES C CXX)
+project(Forge LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -16,11 +16,11 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 
-add_executable(SDL-GameEngine
+add_executable(Forge
     src/main.cpp
 )
 
-target_include_directories(SDL-GameEngine PRIVATE
+target_include_directories(Forge PRIVATE
     ${CMAKE_SOURCE_DIR}/include
 )
 
@@ -31,7 +31,7 @@ add_custom_command(
         "$<TARGET_FILE_DIR:${PROJECT_NAME}>/assets"
 )
 
-target_link_libraries(SDL-GameEngine PRIVATE 
+target_link_libraries(Forge PRIVATE 
     lua 
     sol2
     glm::glm
