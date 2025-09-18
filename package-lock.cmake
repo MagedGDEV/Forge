@@ -1,4 +1,11 @@
 CPMAddPackage(
+    NAME SDL2
+    GITHUB_REPOSITORY libsdl-org/SDL
+    GIT_TAG release-2.32.10
+    OPTIONS "SDL_SHARED ON"
+)
+
+CPMAddPackage(
     NAME lua
     GITHUB_REPOSITORY lua/lua
     GIT_TAG v5.4.8
