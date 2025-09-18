@@ -6,6 +6,13 @@ CPMAddPackage(
 )
 
 CPMAddPackage(
+    NAME SDL2_image
+    GITHUB_REPOSITORY libsdl-org/SDL_image
+    GIT_TAG release-2.8.8
+    OPTIONS "SDL2IMAGE_SHARED ON"
+)
+
+CPMAddPackage(
     NAME lua
     GITHUB_REPOSITORY lua/lua
     GIT_TAG v5.4.8
