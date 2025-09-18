@@ -12,9 +12,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(CPM)
 CPMUsePackageLock(package-lock.cmake)
 
-find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
-find_package(SDL2_mixer REQUIRED)
 
 add_executable(Forge
     src/main.cpp
@@ -32,11 +29,5 @@ add_custom_command(
 )
 
 target_link_libraries(Forge PRIVATE 
-    lua 
-    sol2
-    glm::glm
-    imgui
-    SDL2::SDL2 
-    SDL2_image::SDL2_image 
-    SDL2_mixer::SDL2_mixer
+
 )
