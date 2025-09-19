@@ -31,4 +31,5 @@ add_custom_command(
 target_link_libraries(Forge PRIVATE 
     SDL2
     SDL2_image
+    SDL2_ttf
 )

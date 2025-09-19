@@ -9,7 +9,21 @@ CPMAddPackage(
     NAME SDL2_image
     GITHUB_REPOSITORY libsdl-org/SDL_image
     GIT_TAG release-2.8.8
-    OPTIONS "SDL2IMAGE_SHARED ON"
+)
+
+CPMAddPackage(
+    NAME Freetype
+    GITHUB_REPOSITORY freetype/freetype
+    GIT_TAG VER-2-14-1
+)
+if (TARGET freetype)
+    add_library(Freetype::Freetype ALIAS freetype)
+endif()
+
+CPMAddPackage(
+    NAME SDL2_ttf
+    GITHUB_REPOSITORY libsdl-org/SDL_ttf
+    GIT_TAG release-2.24.0
 )
 
 CPMAddPackage(
