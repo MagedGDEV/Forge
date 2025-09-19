@@ -33,4 +33,8 @@ target_link_libraries(Forge PRIVATE
     SDL2_image
     SDL2_ttf
     SDL2_mixer
+    imgui
+    glm
+    sol2
+    lua
 )
