@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
-#include <SDL2_mixer/SDL_mixer.h>
-#include <SDL2_ttf/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 #include <glm/glm.hpp>
 
@@ -13,9 +13,12 @@
 
 int main () 
 {
-    std::cout << "Hello World!" << std::endl;
-    
     SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG);
+    TTF_Init();
+    Mix_Init(MIX_INIT_MP3);
+
+    std::cout << "Hello World\n";
 
     glm::vec2 velocity = glm::vec2(5.0, -2.5);
     velocity = glm::normalize(velocity);
@@ -24,6 +27,9 @@ int main ()
     lua.open_libraries(sol::lib::base);
     lua.script("print('Hello from Lua via sol2!')");
     
+    Mix_Quit();
+    TTF_Quit();
+    IMG_Quit();
     SDL_Quit();
     return 0;
 }
