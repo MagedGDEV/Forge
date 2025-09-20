@@ -31,8 +31,6 @@ add_library(lua STATIC
     ${lua_SOURCE_DIR}/lutf8lib.c
     ${lua_SOURCE_DIR}/loadlib.c
     ${lua_SOURCE_DIR}/linit.c
-    ${lua_SOURCE_DIR}/ltests.c
-    ${lua_SOURCE_DIR}/lua.c
 )
 
 target_include_directories(lua PUBLIC 
