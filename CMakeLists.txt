@@ -49,6 +49,7 @@ find_package(SDL2_ttf REQUIRED)
 
 add_executable(Forge
     src/main.cpp
+    src/game.cpp
 )
 
 target_include_directories(Forge PRIVATE
