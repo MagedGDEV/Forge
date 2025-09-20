@@ -6,12 +6,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(SDL2_DLLS
-    "$ENV{SDL2_PATH}/SDL2/lib/x64/SDL2.dll"
-    "$ENV{SDL2_PATH}/SDL2_image/lib/x64/SDL2_image.dll"
-    "$ENV{SDL2_PATH}/SDL2_ttf/lib/x64/SDL2_ttf.dll"
-    "$ENV{SDL2_PATH}/SDL2_mixer/lib/x64/SDL2_mixer.dll"
-)
+if (WIN32)
+    set(SDL2_DLLS
+        "$ENV{SDL2_PATH}/SDL2/lib/x64/SDL2.dll"
+        "$ENV{SDL2_PATH}/SDL2_image/lib/x64/SDL2_image.dll"
+        "$ENV{SDL2_PATH}/SDL2_ttf/lib/x64/SDL2_ttf.dll"
+        "$ENV{SDL2_PATH}/SDL2_mixer/lib/x64/SDL2_mixer.dll"
+    )
+endif()
+
 set(ASSETS_DIR
     "${CMAKE_SOURCE_DIR}/assets"
 )
@@ -19,12 +22,22 @@ set(ASSETS_DIR
 list(APPEND CMAKE_MODULE_PATH 
     ${CMAKE_CURRENT_SOURCE_DIR}/cmake
 )
+
+if (WIN32)
 list(APPEND CMAKE_PREFIX_PATH
     "$ENV{SDL2_PATH}/SDL2/cmake"
     "$ENV{SDL2_PATH}/SDL2_image/cmake"
     "$ENV{SDL2_PATH}/SDL2_ttf/cmake"
     "$ENV{SDL2_PATH}/SDL2_mixer/cmake"
 )
+elseif(APPLE)
+list(APPEND CMAKE_PREFIX_PATH
+    "$ENV{SDL2_PATH}/SDL2.framework/Versions/A/Resources/CMake"
+    "$ENV{SDL2_PATH}/SDL2_image.framework/Versions/A/Resources/CMake"
+    "$ENV{SDL2_PATH}/SDL2_mixer.framework/Versions/A/Resources/CMake"
+    "$ENV{SDL2_PATH}/SDL2_ttf.framework/Versions/A/Resources/CMake"
+)
+endif()
 
 include(CPM)
 CPMUsePackageLock(package-lock.cmake)
