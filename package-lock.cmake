@@ -1,29 +1,4 @@
 CPMAddPackage(
-    NAME SDL2
-    GITHUB_REPOSITORY libsdl-org/SDL
-    GIT_TAG release-2.32.10
-    OPTIONS "SDL_SHARED ON"
-)
-
-CPMAddPackage(
-    NAME SDL2_image
-    GITHUB_REPOSITORY libsdl-org/SDL_image
-    GIT_TAG release-2.8.8
-)
-
-CPMAddPackage(
-    NAME SDL2_ttf
-    GITHUB_REPOSITORY libsdl-org/SDL_ttf
-    GIT_TAG release-2.24.0
-)
-
-CPMAddPackage(
-    NAME SDL2_mixer
-    GITHUB_REPOSITORY libsdl-org/SDL_mixer
-    GIT_TAG release-2.8.1
-)
-
-CPMAddPackage(
     NAME lua
     GITHUB_REPOSITORY lua/lua
     GIT_TAG v5.4.8

@@ -6,12 +6,33 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(ASSETS_DIR "${CMAKE_SOURCE_DIR}/assets")
+set(SDL2_DLLS
+    "$ENV{SDL2_PATH}/SDL2/lib/x64/SDL2.dll"
+    "$ENV{SDL2_PATH}/SDL2_image/lib/x64/SDL2_image.dll"
+    "$ENV{SDL2_PATH}/SDL2_ttf/lib/x64/SDL2_ttf.dll"
+    "$ENV{SDL2_PATH}/SDL2_mixer/lib/x64/SDL2_mixer.dll"
+)
+set(ASSETS_DIR
+    "${CMAKE_SOURCE_DIR}/assets"
+)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH 
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake
+)
+list(APPEND CMAKE_PREFIX_PATH
+    "$ENV{SDL2_PATH}/SDL2/cmake"
+    "$ENV{SDL2_PATH}/SDL2_image/cmake"
+    "$ENV{SDL2_PATH}/SDL2_ttf/cmake"
+    "$ENV{SDL2_PATH}/SDL2_mixer/cmake"
+)
+
 include(CPM)
 CPMUsePackageLock(package-lock.cmake)
 
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
 add_executable(Forge
     src/main.cpp
@@ -21,6 +42,16 @@ target_include_directories(Forge PRIVATE
     ${CMAKE_SOURCE_DIR}/include
 )
 
+if (WIN32)
+    foreach(DLL ${SDL2_DLLS})
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${DLL}" 
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+        )
+    endforeach()
+endif()
+
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -29,10 +60,10 @@ add_custom_command(
 )
 
 target_link_libraries(Forge PRIVATE 
-    SDL2
-    SDL2_image
-    SDL2_ttf
-    SDL2_mixer
+    SDL2::SDL2 
+    SDL2_image::SDL2_image
+    SDL2_ttf::SDL2_ttf 
+    SDL2_mixer::SDL2_mixer
     imgui
     glm
     sol2
