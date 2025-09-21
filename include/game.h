@@ -8,6 +8,7 @@ public:
     Game();
     ~Game();
     void intialize();
+    void setup();
     void run();
     void processInput();
     void update();

@@ -33,14 +33,17 @@ void Game::intialize()
         -1,
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
-    
     if (!renderer)
         std::cerr << "Error Creating SDL renderer" << std::endl;
 
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);    
 
-
     isRunning = true;
+}
+
+void Game::setup()
+{
+
 }
 
 void Game::run()
@@ -80,6 +83,10 @@ void Game::render()
 {
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderClear(renderer);
+
+    SDL_Rect rect {30, 40, 100, 200};
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderFillRect(renderer, &rect);
 
     SDL_RenderPresent(renderer);
 }
