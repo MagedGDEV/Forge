@@ -92,7 +92,7 @@ void Game::render()
     SDL_FreeSurface(surface);
 
     SDL_Rect rect {40, 40, 32, 32};
-    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_RenderCopy(renderer, texture, nullptr, &rect);
 
     SDL_DestroyTexture(texture);
 

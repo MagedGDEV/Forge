@@ -24,19 +24,19 @@ list(APPEND CMAKE_MODULE_PATH
 )
 
 if (WIN32)
-list(APPEND CMAKE_PREFIX_PATH
-    "$ENV{SDL2_PATH}/SDL2/cmake"
-    "$ENV{SDL2_PATH}/SDL2_image/cmake"
-    "$ENV{SDL2_PATH}/SDL2_ttf/cmake"
-    "$ENV{SDL2_PATH}/SDL2_mixer/cmake"
-)
+    list(APPEND CMAKE_PREFIX_PATH
+        "$ENV{SDL2_PATH}/SDL2/cmake"
+        "$ENV{SDL2_PATH}/SDL2_image/cmake"
+        "$ENV{SDL2_PATH}/SDL2_ttf/cmake"
+        "$ENV{SDL2_PATH}/SDL2_mixer/cmake"
+    )
 elseif(APPLE)
-list(APPEND CMAKE_PREFIX_PATH
-    "$ENV{SDL2_PATH}/SDL2.framework/Versions/A/Resources/CMake"
-    "$ENV{SDL2_PATH}/SDL2_image.framework/Versions/A/Resources/CMake"
-    "$ENV{SDL2_PATH}/SDL2_mixer.framework/Versions/A/Resources/CMake"
-    "$ENV{SDL2_PATH}/SDL2_ttf.framework/Versions/A/Resources/CMake"
-)
+    list(APPEND CMAKE_PREFIX_PATH
+        "$ENV{SDL2_PATH}/SDL2.framework/Versions/A/Resources/CMake"
+        "$ENV{SDL2_PATH}/SDL2_image.framework/Versions/A/Resources/CMake"
+        "$ENV{SDL2_PATH}/SDL2_mixer.framework/Versions/A/Resources/CMake"
+        "$ENV{SDL2_PATH}/SDL2_ttf.framework/Versions/A/Resources/CMake"
+    )
 endif()
 
 include(CPM)
