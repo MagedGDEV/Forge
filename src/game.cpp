@@ -17,9 +17,6 @@ void Game::intialize()
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
         std::cerr << "Error Intializing SDL" << std::endl;
 
-    SDL_DisplayMode displayMode;
-    SDL_GetCurrentDisplayMode(0, &displayMode);
-
     window = SDL_CreateWindow(
         nullptr,
         SDL_WINDOWPOS_CENTERED,
@@ -34,7 +31,8 @@ void Game::intialize()
     renderer = SDL_CreateRenderer(
         window,
         -1,
-        SDL_RENDERER_ACCELERATED);
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+    );
     
     if (!renderer)
         std::cerr << "Error Creating SDL renderer" << std::endl;
