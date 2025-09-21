@@ -1,6 +1,7 @@
 #include "game.h"
 
 #include <iostream>
+#include <SDL_image.h>
 
 Game::Game()
 {
@@ -48,6 +49,7 @@ void Game::setup()
 
 void Game::run()
 {
+    setup();
     while (isRunning) 
     {
         processInput();
@@ -84,9 +86,15 @@ void Game::render()
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderClear(renderer);
 
-    SDL_Rect rect {30, 40, 100, 200};
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer, &rect);
+
+    SDL_Surface* surface = IMG_Load("assets/images/tank-tiger-right.png");
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+
+    SDL_Rect rect {40, 40, 32, 32};
+    SDL_RenderCopy(renderer, texture, NULL, &rect);
+
+    SDL_DestroyTexture(texture);
 
     SDL_RenderPresent(renderer);
 }
