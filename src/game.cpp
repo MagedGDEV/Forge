@@ -1,7 +1,10 @@
 #include "game.h"
 
 #include <iostream>
+
 #include <SDL_image.h>
+
+#include <glm/vec2.hpp>
 
 Game::Game()
 {
@@ -42,20 +45,12 @@ void Game::intialize()
     isRunning = true;
 }
 
+glm::vec2 playerPosition, playerVelocity;
+
 void Game::setup()
 {
-
-}
-
-void Game::run()
-{
-    setup();
-    while (isRunning) 
-    {
-        processInput();
-        update();
-        render();
-    }
+    playerPosition = {60, 60};
+    playerVelocity = {1, 0};
 }
 
 void Game::processInput()
@@ -78,7 +73,8 @@ void Game::processInput()
 
 void Game::update()
 {
-
+    playerPosition.x += playerVelocity.x;
+    playerPosition.y += playerVelocity.y;
 }
 
 void Game::render()
@@ -86,17 +82,32 @@ void Game::render()
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderClear(renderer);
 
-
     SDL_Surface* surface = IMG_Load("assets/images/tank-tiger-right.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
 
-    SDL_Rect rect {40, 40, 32, 32};
+    SDL_Rect rect {
+        static_cast<int>(playerPosition.x),
+        static_cast<int>(playerPosition.y),
+        32,
+        32
+    };
     SDL_RenderCopy(renderer, texture, nullptr, &rect);
 
     SDL_DestroyTexture(texture);
 
     SDL_RenderPresent(renderer);
+}
+
+void Game::run()
+{
+    setup();
+    while (isRunning) 
+    {
+        processInput();
+        update();
+        render();
+    }
 }
 
 void Game::destroy()

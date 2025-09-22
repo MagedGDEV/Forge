@@ -9,10 +9,10 @@ public:
     ~Game();
     void intialize();
     void setup();
-    void run();
     void processInput();
     void update();
     void render();
+    void run();
     void destroy();
 
 private:
