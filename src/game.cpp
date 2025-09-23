@@ -6,6 +6,9 @@
 
 #include <glm/vec2.hpp>
 
+constexpr int FPS = 60;
+constexpr int MILLISECOND_PER_FRAME = 1000/FPS;
+
 Game::Game()
 {
     std::cout << "Game intialized\n";
@@ -73,6 +76,9 @@ void Game::processInput()
 
 void Game::update()
 {
+    while (!SDL_TICKS_PASSED(SDL_GetTicks(), millisecPreviousFrame + MILLISECOND_PER_FRAME));
+    millisecPreviousFrame = SDL_GetTicks();
+
     playerPosition.x += playerVelocity.x;
     playerPosition.y += playerVelocity.y;
 }
