@@ -9,14 +9,16 @@ public:
     ~Game();
     void intialize();
     void setup();
-    void run();
     void processInput();
     void update();
     void render();
+    void run();
     void destroy();
 
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
+
     bool isRunning = false;
+    int millisecPreviousFrame = 0;
 };
