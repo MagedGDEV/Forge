@@ -1,28 +1,28 @@
 #include "game.h"
 
-#include <iostream>
-
 #include <SDL_image.h>
 
 #include <glm/vec2.hpp>
+
+#include "logger.h"
 
 constexpr int FPS = 60;
 constexpr int MILLISECOND_PER_FRAME = 1000/FPS;
 
 Game::Game()
 {
-    std::cout << "Game intialized\n";
+    Logger::INFO("Game intialized");
 }
 
 Game::~Game()
 {
-    std::cout << "Game destroyed\n";
+    Logger::INFO("Game destroyed");
 }
 
 void Game::intialize()
 {
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
-        std::cerr << "Error Intializing SDL" << std::endl;
+        Logger::ERR("Error Intializing SDL");
 
     window = SDL_CreateWindow(
         nullptr,
@@ -33,7 +33,7 @@ void Game::intialize()
         SDL_WINDOW_BORDERLESS
     );
     if (!window)
-        std::cerr << "Error Creating SDL window" << std::endl;
+        Logger::ERR("Error Creating SDL window");
 
     renderer = SDL_CreateRenderer(
         window,
@@ -41,7 +41,7 @@ void Game::intialize()
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
     );
     if (!renderer)
-        std::cerr << "Error Creating SDL renderer" << std::endl;
+        Logger::ERR("Error Creating SDL renderer");
 
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);    
 
